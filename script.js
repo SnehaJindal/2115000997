@@ -1,42 +1,27 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const products = [
+    { name: "Product A", price: 49.99 },
+    { name: "Product B", price: 29.99 },
+    { name: "Product C", price: 99.99 },
+    { name: "Product D", price: 19.99 },
+    { name: "Product E", price: 39.99 }
+];
 
-const app = express();
-const port = 3000;
+// Function to display top N products
+function displayTopProducts(n) {
+    const productListDiv = document.getElementById('product-list');
 
-// Middleware to parse JSON bodies
-app.use(bodyParser.json());
+    // Sort products by price (assuming descending order)
+    products.sort((a, b) => b.price - a.price);
 
-// In-memory storage for averages (replace with database in real applications)
-let averages = {};
-
-// POST /numbers/:numberid endpoint
-app.post('/numbers/:numberid', (req, res) => {
-  const numberid = req.params.numberid;
-  const numbers = req.body.numbers;
-
-  // Validate input
-  if (!Array.isArray(numbers) || numbers.length === 0 || !numbers.every(num => !isNaN(num))) {
-    return res.status(400).json({ error: 'Invalid numbers format or empty list' });
-  }
-
-  // Calculate average
-  const average = calculateAverage(numbers);
-
-  // Store average (in real application, store in database)
-  averages[numberid] = average;
-
-  // Return response
-  res.json({ numberid, average });
-});
-
-// Helper function to calculate average
-function calculateAverage(numbers) {
-  const sum = numbers.reduce((acc, curr) => acc + parseFloat(curr), 0);
-  return sum / numbers.length;
+    // Display top N products
+    for (let i = 0; i < n && i < products.length; i++) {
+        const product = products[i];
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+        productDiv.innerHTML = `<span class="product-name">${product.name}</span> - <span class="product-price">$${product.price.toFixed(2)}</span>`;
+        productListDiv.appendChild(productDiv);
+    }
 }
 
-// Start server
-app.listen(port, () => {
-  console.log(`Average Calculator microservice listening at http://localhost:${port}`);
-});
+// Call function to display top 3 products (you can change the number as needed)
+displayTopProducts(3);

@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Average Calculator</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top N Products</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Average Calculator</h1>
-    <div>
-      <label for="numberInput">Enter numbers (comma separated):</label><br>
-      <textarea id="numberInput" rows="5" cols="50"></textarea>
+    <div class="container">
+        <h1>Top N Products</h1>
+        <div id="product-list"></div>
     </div>
-    <div>
-      <button onclick="calculateAverage()">Calculate Average</button>
-    </div>
-    <div id="averageResult">
-      <!-- Result will be displayed here -->
-    </div>
-  </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
